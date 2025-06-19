@@ -93,8 +93,8 @@ class PrestaShopWebService(object):
     # 4th version number is to avoid constant version changes
     MAX_COMPATIBLE_VERSION = '1.7.8.999'
 
-    def __init__(self, api_url, api_key, debug=False, session=None,
-                 verbose=False):
+    def __init__(self, api_url, api_key, headers=False, debug=False,
+                 session=None, verbose=False):
         """
         Create an instance of PrestashopWebService.
 
