@@ -109,6 +109,12 @@ class PrestaShopWebService(object):
         except PrestaShopWebServiceError as err:
             ...
 
+        If headers is set, this means that you want to put some headers
+        on all requests sent by Prestapyt. For example, you could want
+        to change the User-Agent for all requests. You can do that
+        by adding headers={'User-Agent': 'your_user_agent'} on this init
+        method.
+
         When verbose mode is activated, you might need to activate the
         debug logging for the logger "requests.packages.urllib3"::
 
@@ -120,6 +126,7 @@ class PrestaShopWebService(object):
 
         :param api_url: Root URL for the shop
         :param api_key: Authentification key
+        :param headers: Additionnal headers on all requests
         :param debug: activate PrestaShop's webservice debug mode
         :param session: pass a custom requests Session
         :param verbose: activate logging of the requests/responses (but no
@@ -148,6 +155,9 @@ class PrestaShopWebService(object):
 
         if not self.client.auth:
             self.client.auth = (api_key, '')
+
+        if self.headers:
+            self.client.headers = headers
 
     def _parse_error(self, xml_content):
         """Take the XML content as string and extract the PrestaShop error.
